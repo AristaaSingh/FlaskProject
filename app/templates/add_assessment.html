@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h1 class="text-center">Add Assessment</h1>
+        <form method="POST" action="{{ url_for('add_assessment') }}" class="mt-4">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.title.label(class="font-weight-bold") }}
+                {{ form.title(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.module_code.label(class="font-weight-bold") }}
+                {{ form.module_code(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.deadline_date.label(class="font-weight-bold") }}
+                <input type="datetime-local" name="deadline_date" id="deadline_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                {{ form.description.label(class="font-weight-bold") }}
+                {{ form.description(class="form-control") }}
+            </div>
+            <div class="form-group custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="is_complete" name="is_complete">
+                <label class="custom-control-label" for="is_complete">Completed</label>
+            </div>
+            <div class="form-group text-center">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+            
+        </form>
+    </div>
+{% endblock %}

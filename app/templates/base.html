@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>{% block title %} Assessment Tracker {% endblock %}</title>
+
+        <!-- Local CSS and Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+        <!-- icons from Boxicons (open source)-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+        <!-- navigation bar -->
+        <nav class="navbar navbar-expand-sm navbar-light my-navbar-1">
+            <a class="navbar-brand" href="#"><i class='bx bx-notepad'></i>Assessment Tracker</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}"> My Assessments <span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('add_assessment') }}">Add Assessment</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('view_completed') }}">Completed Assessments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('view_incomplete') }}">Incomplete Assessments</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- flashed message followed by content block -->
+        <br>
+        <div class="container mt-4">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div class="container mt-4">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" id="flash-message">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+
+        <br><br><br><br><br><br><br><br>
+        <footer class="footer mt-auto py-3 my-footer">
+            <div class="container text-center">
+                <span class="text-muted">&copy; 2024 Aristaa [sc23as2@leeds.ac.uk]. All rights reserved.</span>
+            </div>
+        </footer>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='flash_messages.js') }}"></script>
+    </body>
+</html>
